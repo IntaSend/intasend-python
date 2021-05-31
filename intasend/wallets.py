@@ -17,7 +17,9 @@ class Wallet(APIBase):
         }
         return self.send_request("POST", "wallets/", payload)
 
-    def list(self):
+    def retrieve(self, id=None):
+        if id:
+            return self.details(id)
         return self.send_request("GET", "wallets/", None)
 
     def transactions(self, id):
