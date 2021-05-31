@@ -1,5 +1,7 @@
 import requests
 
+from .exceptions import *
+
 
 class APIBase(object):
     def __init__(self, **kwargs):
@@ -14,9 +16,14 @@ class APIBase(object):
         headers = self.get_headers()
         resp = requests.request(
             request_type, url, json=payload, headers=headers)
-        if resp.status_code != 200:
-            print(url)
-            raise Exception(resp.text)
+        if resp.status_code == 400:
+            raise IntaSendBadRequest(resp.text)
+        elif resp.status_code == 403:
+            raise IntaSendNotAllowed(resp.text)
+        elif resp.status_code == 500:
+            raise IntaSendServerError(resp.text)
+        elif resp.status_code == 401:
+            raise IntaSendUnauthorized(resp.text)
         return resp.json()
 
     def get_headers(self):
