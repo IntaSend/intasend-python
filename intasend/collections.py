@@ -13,7 +13,7 @@ class Collect(APIBase):
             "name": name,
             "email": email
         }
-        return self.send_request("payment/collection/", payload)
+        return self.send_request("POST", "payment/collection/", payload)
 
     def get_quote(self, amount, method, currency="KES", mobile_tarrif="BUSINESS-PAYS", card_tarrif="BUSINESS-PAYS"):
         payload = {
@@ -23,4 +23,4 @@ class Collect(APIBase):
             "mobile_tarrif": mobile_tarrif,
             "card_tarrif": card_tarrif
         }
-        return self.send_request("payment/collection/", payload)
+        return self.send_request("POST", "payment/collection/", payload)
