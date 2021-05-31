@@ -2,6 +2,15 @@ from .client import APIBase
 
 
 class Transfer(APIBase):
+    def send_money(self, account):
+        pass
+
+    def approve(self, account):
+        pass
+
+    def status(self, account):
+        pass
+
     def mpesa(self, phone_number, email, amount, narrative, currency="KES", api_ref="API Request", name=None):
         payload = {
             "public_key": self.publishable_key,
