@@ -5,7 +5,7 @@ import base64
 
 
 class Transfer(APIBase):
-    def _sign_nonce(self, private_key, message):
+    def _sign_message(self, private_key, message):
         pkey = OpenSSLCrypto.load_privatekey(
             OpenSSLCrypto.FILETYPE_PEM, private_key, None)
         sign = OpenSSL.crypto.sign(pkey, message, "sha256")
@@ -23,9 +23,9 @@ class Transfer(APIBase):
 
     def approve(self, payload):
         nonce = payload["nonce"]
-        signed_nonce = self._sign_nonce(self.private_key, nonce)
+        signed_nonce = self._sign_message(
+            self.private_key.encode("utf-8"), nonce)
         payload["nonce"] = signed_nonce
-        print(f"new payload: {payload}")
         return self.send_request("POST", "send-money/approve/", payload)
 
     def status(self, account):
