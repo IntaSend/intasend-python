@@ -28,8 +28,11 @@ class Transfer(APIBase):
         payload["nonce"] = signed_nonce
         return self.send_request("POST", "send-money/approve/", payload)
 
-    def status(self, account):
-        pass
+    def status(self, tracking_id):
+        payload = {
+            "tracking_id": tracking_id
+        }
+        return self.send_request("POST", "send-money/status/", payload)
 
     def mpesa(self,  device_id, currency, transactions, callback_url=None):
         provider = "MPESA-B2C"
