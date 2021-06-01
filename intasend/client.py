@@ -7,6 +7,7 @@ class APIBase(object):
     def __init__(self, **kwargs):
         self.token = kwargs.get("token")
         self.publishable_key = kwargs.get("publishable_key")
+        self.private_key = kwargs.get("private_key")
         if not self.token:
             raise Exception("Authentication token is required")
         super().__init__()
