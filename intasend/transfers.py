@@ -2,8 +2,15 @@ from .client import APIBase
 
 
 class Transfer(APIBase):
-    def send_money(self, account):
-        pass
+    def send_money(self, device_id, provider, currency, transactions, callback_url=None):
+        payload = {
+            "device_id": device_id,
+            "provider": provider,
+            "currency": currency,
+            "transactions": transactions,
+            "callback_url": callback_url
+        }
+        return self.send_request("POST", "send-money/initiate/", payload)
 
     def approve(self, account):
         pass
@@ -11,41 +18,18 @@ class Transfer(APIBase):
     def status(self, account):
         pass
 
-    def mpesa(self, phone_number, email, amount, narrative, currency="KES", api_ref="API Request", name=None):
-        payload = {
-            "public_key": self.publishable_key,
-            "currency": currency,
-            "method": "M-PESA",
-            "amount": amount,
-            "phone_number": phone_number,
-            "api_ref": api_ref,
-            "name": name,
-            "email": email
-        }
-        return self.send_request("POST", "payment/collection/", payload)
+    def mpesa(self,  device_id, currency, transactions, callback_url=None):
+        provider = "MPESA-B2C"
+        return self.send_money(device_id, provider, currency, transactions, callback_url)
 
-    def intasend(self, phone_number, email, amount, narrative, currency="KES", api_ref="API Request", name=None):
-        payload = {
-            "public_key": self.publishable_key,
-            "currency": currency,
-            "method": "M-PESA",
-            "amount": amount,
-            "phone_number": phone_number,
-            "api_ref": api_ref,
-            "name": name,
-            "email": email
-        }
-        return self.send_request("POST", "payment/collection/", payload)
+    def mpesa_b2b(self,  device_id, currency, transactions, callback_url=None):
+        provider = "MPESA-B2B"
+        return self.send_money(device_id, provider, currency, transactions, callback_url)
 
-    # def bank(self, phone_number, email, amount, narrative, currency="KES", api_ref="API Request", name=None):
-    #     payload = {
-    #         "public_key": self.publishable_key,
-    #         "currency": currency,
-    #         "method": "M-PESA",
-    #         "amount": amount,
-    #         "phone_number": phone_number,
-    #         "api_ref": api_ref,
-    #         "name": name,
-    #         "email": email
-    #     }
-    #     return self.send_request("payment/collection/", payload)
+    def intasend(self, device_id, currency, transactions, callback_url=None):
+        provider = "INTASEND"
+        return self.send_money(device_id, provider, currency, transactions, callback_url)
+
+    def bank(self, device_id, currency, transactions, callback_url=None):
+        provider = "PESALINK"
+        return self.send_money(device_id, provider, currency, transactions, callback_url)
