@@ -11,10 +11,10 @@ class Chagebacks(APIBase):
         }
         return self.send_request("POST", "chargebacks/", payload)
 
-    def retrieve(self, id=None):
-        if id:
-            return self.details(id)
+    def retrieve(self, chargeback_id=None):
+        if chargeback_id:
+            return self.details(chargeback_id)
         return self.send_request("GET", "chargebacks/", {})
 
-    def details(self, id=None):
-        return self.send_request("GET", f"chargebacks/{id}/", {})
+    def details(self, chargeback_id=None):
+        return self.send_request("GET", f"chargebacks/{chargeback_id}/", {})

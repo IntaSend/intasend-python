@@ -1,15 +1,8 @@
 from .client import APIBase
-import OpenSSL
-from OpenSSL import crypto as OpenSSLCrypto
+from .utils import sign_message
 
 
 class Transfer(APIBase):
-    def _sign_message(self, private_key, message):
-        pkey = OpenSSLCrypto.load_privatekey(
-            OpenSSLCrypto.FILETYPE_PEM, private_key, None)
-        sign = OpenSSL.crypto.sign(pkey, message, "sha256")
-        return sign.hex()
-
     def send_money(self, device_id, provider, currency, transactions, callback_url=None):
         payload = {
             "device_id": device_id,
@@ -22,8 +15,7 @@ class Transfer(APIBase):
 
     def approve(self, payload):
         nonce = payload["nonce"]
-        signed_nonce = self._sign_message(
-            self.private_key.encode("utf-8"), nonce)
+        signed_nonce = sign_message(self.private_key.encode("utf-8"), nonce)
         payload["nonce"] = signed_nonce
         return self.send_request("POST", "send-money/approve/", payload)
 

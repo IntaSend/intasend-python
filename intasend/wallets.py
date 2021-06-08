@@ -4,8 +4,10 @@ from .collections import Collect
 
 class Wallet(APIBase):
     def __init__(self, **kwargs):
+        """Wallets management service
+        """
         self.collect = Collect(**kwargs)
-        return super().__init__(**kwargs)
+        super().__init__(**kwargs)
 
     def details(self, wallet_id):
         return self.send_request("GET", f"wallets/{wallet_id}", None)
@@ -22,8 +24,8 @@ class Wallet(APIBase):
             return self.details(wallet_id)
         return self.send_request("GET", "wallets/", None)
 
-    def transactions(self, id):
-        return self.send_request("GET", f"wallets/{id}/transactions", None)
+    def transactions(self, wallet_id):
+        return self.send_request("GET", f"wallets/{wallet_id}/transactions", None)
 
     def intra_transfer(self, origin_id, destination_id, amount, narrative):
         payload = {
