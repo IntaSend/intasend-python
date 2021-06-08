@@ -12,6 +12,7 @@ def get_service_url(service_endpoint, test=False):
 
 class APIBase(object):
     def __init__(self, **kwargs):
+        """API helper defination."""
         self.token = kwargs.get("token")
         self.publishable_key = kwargs.get("publishable_key")
         self.private_key = kwargs.get("private_key")

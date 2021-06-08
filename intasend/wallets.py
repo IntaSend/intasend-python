@@ -4,8 +4,7 @@ from .collections import Collect
 
 class Wallet(APIBase):
     def __init__(self, **kwargs):
-        """Wallets management service
-        """
+        """Wallets management service."""
         self.collect = Collect(**kwargs)
         super().__init__(**kwargs)
 
