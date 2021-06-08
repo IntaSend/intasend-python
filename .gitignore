@@ -4,3 +4,4 @@ debug.py
 dist/
 *.egg-info
 build/
+devnotes.md
