@@ -4,7 +4,8 @@ from OpenSSL import crypto as OpenSSLCrypto
 
 
 def generate_keys():
-    """Returns a private and public key.
+    """
+    Returns a private and public key.
 
     Returns:
         tupple: values of generated private and public key
@@ -16,7 +17,8 @@ def generate_keys():
 
 
 def sign_message(private_key, message):
-    """Sign message with the private key.
+    """
+    Sign message with the private key.
 
     Args:
         private_key (byte): Private key
