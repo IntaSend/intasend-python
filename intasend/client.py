@@ -21,7 +21,7 @@ class APIBase(object):
             raise Exception("Authentication token is required")
         super().__init__()
 
-    def send_request(self, request_type, service_endpoint, payload):
+    def send_request(self, request_type, service_endpoint, payload, noauth=False):
         url = get_service_url(service_endpoint,  self.test)
         headers = self.get_headers()
         resp = requests.request(

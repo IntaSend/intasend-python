@@ -2,6 +2,10 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3441c7d731e64e899b8ca3f125422f9a)](https://app.codacy.com/gh/IntaSend/intasend-python?utm_source=github.com&utm_medium=referral&utm_content=IntaSend/intasend-python&utm_campaign=Badge_Grade_Settings)
 
+## Official documentation
+
+Checkout our [API documentation](https://developers.intasend.com/) for more details and for payload references.
+
 ## Setup and authenticating service
 
     from intasend import APIService
@@ -24,7 +28,7 @@ Use the following helper function to generate a RSA Key for nonce signing. Keep 
     print(private_key)
     print(public_key)
 
-## Services
+## Examples
 
     # Remember to switch of test when going live by removing the flag or set it to False
 
@@ -71,3 +75,8 @@ Use the following helper function to generate a RSA Key for nonce signing. Keep 
 
     status = service.transfer.status(response.get("tracking_id"))
     print(f"Status: {status}")
+
+
+    # Create payment link
+    title = "Link title/name"
+    response = service.payment_links.create(title=title, currency="KES", amount=10)
