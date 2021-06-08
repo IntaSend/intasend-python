@@ -1,4 +1,3 @@
-from .client import APIBase
 from .collections import Collect
 from .transfers import Transfer
 from .wallets import Wallet
@@ -10,6 +9,8 @@ from .customers import Customers
 
 class APIService:
     def __init__(self, **kwargs):
+        """API Services Initialization
+        """
         self.collect = Collect(**kwargs)
         self.transfer = Transfer(**kwargs)
         self.wallets = Wallet(**kwargs)

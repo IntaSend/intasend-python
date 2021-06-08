@@ -1,7 +1,6 @@
 from .client import APIBase
 import OpenSSL
 from OpenSSL import crypto as OpenSSLCrypto
-import base64
 
 
 class Transfer(APIBase):

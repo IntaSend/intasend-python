@@ -7,8 +7,8 @@ class Wallet(APIBase):
         self.collect = Collect(**kwargs)
         return super().__init__(**kwargs)
 
-    def details(self, id):
-        return self.send_request("GET", f"wallets/{id}", None)
+    def details(self, wallet_id):
+        return self.send_request("GET", f"wallets/{wallet_id}", None)
 
     def create(self, currency):
         payload = {
@@ -17,9 +17,9 @@ class Wallet(APIBase):
         }
         return self.send_request("POST", "wallets/", payload)
 
-    def retrieve(self, id=None):
-        if id:
-            return self.details(id)
+    def retrieve(self, wallet_id=None):
+        if wallet_id:
+            return self.details(wallet_id)
         return self.send_request("GET", "wallets/", None)
 
     def transactions(self, id):

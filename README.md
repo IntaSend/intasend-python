@@ -16,7 +16,6 @@
 
 Use the following helper function to generate a RSA Key for nonce signing. Keep your private_key safe and share the public key with IntaSend. Note: These key pair is required only if you are sending money.
 
-
     from intasend.utils import generate_keys
 
     private_key, public_key = generate_keys()
@@ -24,8 +23,10 @@ Use the following helper function to generate a RSA Key for nonce signing. Keep 
     print(public_key)
 
 ## Services
-    
-    service = APIService(token="token",publishable_key=publishable_key, private_key=private_key)
+
+    # Remember to switch of test when going live by removing the flag or set it to False
+
+    service = APIService(token="token",publishable_key=publishable_key, private_key=private_key, test=True)
     
     # Trigger M-Pesa STK Push
     response = service.collect.mpesa(phone_number=2547...,

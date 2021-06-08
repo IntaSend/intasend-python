@@ -1,6 +1,13 @@
 import requests
 
-from .exceptions import *
+from .exceptions import (IntaSendBadRequest, IntaSendNotAllowed,
+                         IntaSendServerError, IntaSendUnauthorized)
+
+
+def get_service_url(service_endpoint, test=False):
+    if test:
+        return f"https://sandbox.intasend.com/api/v1/{service_endpoint}"
+    return f"https://payment.intasend.com/api/v1/{service_endpoint}"
 
 
 class APIBase(object):
@@ -8,12 +15,13 @@ class APIBase(object):
         self.token = kwargs.get("token")
         self.publishable_key = kwargs.get("publishable_key")
         self.private_key = kwargs.get("private_key")
+        self.test = kwargs.get("test", False)
         if not self.token:
             raise Exception("Authentication token is required")
         super().__init__()
 
     def send_request(self, request_type, service_endpoint, payload):
-        url = self.get_service_url(service_endpoint)
+        url = get_service_url(service_endpoint,  self.test)
         headers = self.get_headers()
         resp = requests.request(
             request_type, url, json=payload, headers=headers)
@@ -31,6 +39,3 @@ class APIBase(object):
         return {
             "Authorization": f"Bearer {self.token}"
         }
-
-    def get_service_url(self, service_endpoint):
-        return f"https://sandbox.intasend.com/api/v1/{service_endpoint}"
