@@ -1,5 +1,7 @@
 # IntaSend Payments Gateway - Python SDK
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3441c7d731e64e899b8ca3f125422f9a)](https://app.codacy.com/gh/IntaSend/intasend-python?utm_source=github.com&utm_medium=referral&utm_content=IntaSend/intasend-python&utm_campaign=Badge_Grade_Settings)
+
 ## Setup and authenticating service
 
     from intasend import APIService
