@@ -6,7 +6,11 @@
 
 Checkout our [API documentation](https://developers.intasend.com/) for more details and for payload references.
 
-## Setup and authenticating service
+## How to install
+
+    pip install intasend-python
+
+## Authenticating service
 
     from intasend import APIService
 

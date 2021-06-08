@@ -1,7 +1,8 @@
-from distutils.core import setup
+from setuptools import setup
+
 setup(
     name='intasend-python',
-    packages=['intasend-python'],
+    packages=['intasend'],
     version='0.1',
     license='MIT',
     description='Official Python SDK for IntaSend Payments Gateway API',
@@ -20,5 +21,5 @@ setup(
         'Topic :: Software Development :: Build Tools',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
-    ],
+    ]
 )
