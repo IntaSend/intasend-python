@@ -50,7 +50,7 @@ Use the following helper function to generate a RSA Key for nonce signing. Keep 
     response = service.wallets.details(<WALLET-ID>)
     print(response)
 
-    response = service.wallets.transactions(203)
+    response = service.wallets.transactions(<WALLET-ID>)
     print(response)
     
     response = service.wallets.create("GBP")
@@ -58,15 +58,15 @@ Use the following helper function to generate a RSA Key for nonce signing. Keep 
 
     # Fund specific wallet
     response = service.wallets.fund(
-         wallet_id=201, phone_number=25472.., email="customer@example.com", amount=10, narrative="Fees", name="Awesome Customer")
+         wallet_id=<WALLET-ID>, phone_number=25472.., email="customer@example.com", amount=10, narrative="Fees", name="Awesome Customer")
     print(response)
 
     # Wallet to wallet transfers
-    response = service.wallets.intra_transfer(201, 328, 1, "Charge capture")
+    response = service.wallets.intra_transfer(<WALLET-ID-1>, <WALLET-ID-2>, 1, "Charge capture")
     print(response)
 
     # Retrieve Chargebacks
-    response = service.chargebacks.retrieve(41)
+    response = service.chargebacks.retrieve(<CHARGEBACK-ID>)
     print(response)
     
     # Send money
@@ -74,7 +74,7 @@ Use the following helper function to generate a RSA Key for nonce signing. Keep 
                     {'name': 'Awesome Customer 2', 'account': 25472.., 'amount': 10000}]
     
     ## device_id - Note device id is the PSD2 device id from the dashboard - https://developers.intasend.com/apis/extra-payment-authentication
-    response = service.transfer.mpesa(device_id=1, currency='KES', transactions=transactions)
+    response = service.transfer.mpesa(device_id=<DEVICE-ID>, currency='KES', transactions=transactions)
     print(response)
 
     status = service.transfer.status(response.get("tracking_id"))
