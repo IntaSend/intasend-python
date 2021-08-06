@@ -38,7 +38,17 @@ Use the following helper function to generate a RSA Key for nonce signing. Keep 
 
     service = APIService(token="token",publishable_key=publishable_key, private_key=private_key, test=True)
     
-    # Trigger M-Pesa STK Push
+    # Collect payments
+    ## Generate checkout URL
+    response = service.collect.checkout(phone_number=2547...,
+                                        email="felix@intasend.com", amount=10, currency="KES", comment="Fees")
+    print(response)
+
+    ## Get payment status using invoice/tracking id
+    response = service.collect.status(invoice_id="NR5XKGY")
+    print(response)
+
+    ## Trigger M-Pesa STK Push
     response = service.collect.mpesa_stk_push(phone_number=2547...,
                                       email="customer@example.com", amount=10, narrative="Fees")
     print(response)
@@ -80,7 +90,3 @@ Use the following helper function to generate a RSA Key for nonce signing. Keep 
     status = service.transfer.status(response.get("tracking_id"))
     print(f"Status: {status}")
 
-
-    # Create payment link
-    title = "Link title/name"
-    response = service.payment_links.create(title=title, currency="KES", amount=10)
