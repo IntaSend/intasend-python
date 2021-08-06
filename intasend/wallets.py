@@ -35,4 +35,4 @@ class Wallet(APIBase):
         return self.send_request("POST", f"wallets/{origin_id}/intra_transfer/", payload=payload)
 
     def fund(self, wallet_id, phone_number, email, amount, narrative, currency="KES", api_ref="API Request", name=None):
-        return self.collect.mpesa(phone_number=phone_number, email=email, amount=amount, narrative=narrative, currency=currency, api_ref=api_ref, name=name)
+        return self.collect.mpesa_stk_push(phone_number=phone_number, email=email, amount=amount, narrative=narrative, currency=currency, api_ref=api_ref, name=name)

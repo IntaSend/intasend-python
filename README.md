@@ -39,7 +39,7 @@ Use the following helper function to generate a RSA Key for nonce signing. Keep 
     service = APIService(token="token",publishable_key=publishable_key, private_key=private_key, test=True)
     
     # Trigger M-Pesa STK Push
-    response = service.collect.mpesa(phone_number=2547...,
+    response = service.collect.mpesa_stk_push(phone_number=2547...,
                                       email="customer@example.com", amount=10, narrative="Fees")
     print(response)
 
