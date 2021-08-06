@@ -1,11 +1,13 @@
 import secrets
+import os
 from intasend import APIService
-from intasend.utils import generate_keys
+# from intasend.utils import generate_keys
 
-TEST_PRIVATE_KEY = ""
-TEST_PHONE_NUMBER = ""
-TEST_API_TOKEN = ""
-TEST_PUBLISHABLE_KEY = ""
+TEST_PRIVATE_KEY = os.environ.get("TEST_PRIVATE_KEY")
+TEST_PHONE_NUMBER = os.environ.get("TEST_PHONE_NUMBER")
+TEST_API_TOKEN = os.environ.get("TEST_API_TOKEN")
+TEST_PUBLISHABLE_KEY = os.environ.get("TEST_PUBLISHABLE_KEY")
+
 service = APIService(token=TEST_API_TOKEN,
                      publishable_key=TEST_PUBLISHABLE_KEY, private_key=TEST_PRIVATE_KEY, test=True)
 

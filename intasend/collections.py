@@ -3,7 +3,8 @@ from .client import APIBase
 
 class Collect(APIBase):
     def checkout(self, email, amount, currency, **kwargs):
-        """Generates payment checkout URL
+        """
+        Generates payment checkout URL
 
         Args:
             email (string): Customer email
@@ -27,7 +28,6 @@ class Collect(APIBase):
             "currency": currency,
             "email": email,
             "amount": amount,
-            "currency": currency,
             "method": method,
             "api_ref": api_ref,
             "callback_url": callback_url,
@@ -43,7 +43,8 @@ class Collect(APIBase):
         return self.send_request("POST", "checkout/", payload)
 
     def status(self, invoice_id, checkout_id=None, signature=None):
-        """Check status of transaction/invoice
+        """
+        Check status of transaction/invoice
 
         Args:
             invoice_id (string): Invoice or tracking ID

@@ -89,4 +89,3 @@ Use the following helper function to generate a RSA Key for nonce signing. Keep 
 
     status = service.transfer.status(response.get("tracking_id"))
     print(f"Status: {status}")
-
