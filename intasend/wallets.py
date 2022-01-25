@@ -11,10 +11,12 @@ class Wallet(APIBase):
     def details(self, wallet_id):
         return self.send_request("GET", f"wallets/{wallet_id}", None)
 
-    def create(self, currency):
+    def create(self, currency, label, can_disburse=False):
         payload = {
             "wallet_type": "WORKING",
-            "currency": currency
+            "currency": currency,
+            "label": label,
+            "can_disburse": can_disburse
         }
         return self.send_request("POST", "wallets/", payload)
 
