@@ -29,7 +29,8 @@ if __name__ == "__main__":
 
     response = service.wallets.transactions("ZQMMOQO")
     print(response)
-    response = service.wallets.create("EUR")
+    response = service.wallets.create(
+        currency="KES", label="API-WALLET", can_disburse=True)
     print(response)
 
     response = service.wallets.fund(
