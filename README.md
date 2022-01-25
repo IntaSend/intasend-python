@@ -63,7 +63,7 @@ Use the following helper function to generate a RSA Key for nonce signing. Keep 
     response = service.wallets.transactions(<WALLET-ID>)
     print(response)
     
-    response = service.wallets.create("GBP")
+    response = service.wallets.create(currency="KES", label="API-WALLET", can_disburse=True)
     print(response)
 
     # Fund specific wallet
