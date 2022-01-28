@@ -39,7 +39,6 @@ class Collect(APIBase):
             "card_tarrif": card_tarrif,
             "version": "3.0.0"
         }
-        print(payload)
         return self.send_request("POST", "checkout/", payload)
 
     def status(self, invoice_id, checkout_id=None, signature=None):
