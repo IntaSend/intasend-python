@@ -21,6 +21,7 @@ class Collect(APIBase):
         first_name = kwargs.get("first_name")
         last_name = kwargs.get("last_name")
         phone_number = kwargs.get("phone_number")
+        wallet_id = kwargs.get("wallet_id")
         mobile_tarrif = kwargs.get("mobile_tarrif", "BUSINESS-PAYS")
         card_tarrif = kwargs.get("card_tarrif", "BUSINESS-PAYS")
         payload = {
@@ -39,6 +40,8 @@ class Collect(APIBase):
             "card_tarrif": card_tarrif,
             "version": "3.0.0"
         }
+        if wallet_id:
+            payload.update({"wallet_id": wallet_id})
         return self.send_request("POST", "checkout/", payload)
 
     def status(self, invoice_id, checkout_id=None, signature=None):
@@ -65,7 +68,7 @@ class Collect(APIBase):
             }
         return self.send_request("POST", "payment/status/", payload)
 
-    def mpesa_stk_push(self, phone_number, amount, narrative, currency="KES", api_ref="API Request", name=None, email=None):
+    def mpesa_stk_push(self, phone_number, amount, narrative, currency="KES", api_ref="API Request", name=None, email=None, wallet_id=None):
         payload = {
             "public_key": self.publishable_key,
             "currency": currency,
@@ -74,8 +77,11 @@ class Collect(APIBase):
             "phone_number": phone_number,
             "api_ref": api_ref,
             "name": name,
-            "email": email
+            "email": email,
+            "narrative": narrative
         }
+        if wallet_id:
+            payload.update({"wallet_id": wallet_id})
         return self.send_request("POST", "payment/collection/", payload)
 
     def get_quote(self, amount, method, currency="KES", tarrif="BUSINESS-PAYS"):
@@ -83,6 +89,7 @@ class Collect(APIBase):
             "public_key": self.publishable_key,
             "currency": currency,
             "method": method,
-            "tarrif": tarrif
+            "tarrif": tarrif,
+            "amount": amount
         }
         return self.send_request("POST", "payment/get_amount_estimate/", payload)
