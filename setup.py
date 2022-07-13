@@ -14,6 +14,8 @@ setup(
               'mastercard', 'payments kenya', 'intasend'],
     install_requires=[
         'requests',
+        'pycryptodome==3.15.0',
+        'pyOpenSSL==22.0.0'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
