@@ -3,13 +3,13 @@ from setuptools import setup
 setup(
     name='intasend-python',
     packages=['intasend'],
-    version='1.0.3',
+    version='1.0.4',
     license='MIT',
     description='Official Python SDK for IntaSend Payments Gateway API',
     author='Felix Cheruiyot',
     author_email='support@intasend.com',
     url='https://github.com/IntaSend/intasend-python',
-    download_url='https://github.com/IntaSend/intasend-python/archive/v_1.0.3.tar.gz',
+    download_url='https://github.com/IntaSend/intasend-python/archive/v_1.0.4.tar.gz',
     keywords=['payments', 'mpesa', 'mpesa api', 'card payments', 'visa',
               'mastercard', 'payments kenya', 'intasend'],
     install_requires=[
