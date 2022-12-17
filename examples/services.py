@@ -43,8 +43,7 @@ if __name__ == "__main__":
     print(response)
     transactions = [{'name': 'test-name', 'account': TEST_PHONE_NUMBER, 'amount': 10},
                     {'name': 'test-name', 'account': TEST_PHONE_NUMBER, 'amount': 10000}]
-    response = service.transfer.mpesa(
-        device_id="KZQMORO", currency='KES', transactions=transactions)
+    response = service.transfer.mpesa(currency='KES', transactions=transactions)
     print(response)
 
     status = service.transfer.status(response.get("tracking_id"))
