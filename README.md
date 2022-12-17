@@ -14,29 +14,15 @@ Checkout our [API documentation](https://developers.intasend.com/) for more deta
 
     from intasend import APIService
 
-    private_key = """-----BEGIN PRIVATE KEY-----
-        MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCwhxnB5aZD6EqF....8laHwYTQdDbAlCGZB992YoHl
-        -----END PRIVATE KEY-----"""
-
     token = "YOUR-API-TOKEN"
     publishable_key = "YOUR-PUBLISHABLE-KEY"
-    service = APIService(token="token",publishable_key=publishable_key, private_key=private_key)
-
-## How to generate PRIVATE KEY
-
-Use the following helper function to generate a RSA Key for nonce signing. Keep your private_key safe and share the public key with IntaSend. Note: These key pair is required only if you are sending money.
-
-    from intasend.utils import generate_keys
-
-    private_key, public_key = generate_keys()
-    print(private_key)
-    print(public_key)
+    service = APIService(token="token",publishable_key=publishable_key)
 
 ## Examples
 
     # Remember to switch of test when going live by removing the flag or set it to False
 
-    service = APIService(token="token",publishable_key=publishable_key, private_key=private_key, test=True)
+    service = APIService(token="token",publishable_key=publishable_key, test=True)
     
     # Collect payments
     ## Generate checkout URL
@@ -82,9 +68,8 @@ Use the following helper function to generate a RSA Key for nonce signing. Keep 
     # Send money
     transactions = [{'name': 'Awesome Customer 1', 'account': 25472.., 'amount': 10},
                     {'name': 'Awesome Customer 2', 'account': 25472.., 'amount': 10000}]
-    
-    ## device_id - Note device id is the PSD2 device id from the dashboard - https://developers.intasend.com/apis/extra-payment-authentication
-    response = service.transfer.mpesa(device_id=<DEVICE-ID>, currency='KES', transactions=transactions)
+                    
+    response = service.transfer.mpesa(currency='KES', transactions=transactions)
     print(response)
 
     status = service.transfer.status(response.get("tracking_id"))

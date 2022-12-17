@@ -10,12 +10,10 @@ setup(
     author_email='support@intasend.com',
     url='https://github.com/IntaSend/intasend-python',
     download_url='https://github.com/IntaSend/intasend-python/archive/v_1.0.3.tar.gz',
-    keywords=['payments', 'mpesa', 'card payments', 'visa',
+    keywords=['payments', 'mpesa', 'mpesa api', 'card payments', 'visa',
               'mastercard', 'payments kenya', 'intasend'],
     install_requires=[
         'requests',
-        'pycryptodome==3.15.0',
-        'pyOpenSSL==22.0.0'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',

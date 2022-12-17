@@ -1,15 +1,13 @@
 import secrets
 import os
 from intasend import APIService
-# from intasend.utils import generate_keys
 
-TEST_PRIVATE_KEY = os.environ.get("TEST_PRIVATE_KEY")
 TEST_PHONE_NUMBER = os.environ.get("TEST_PHONE_NUMBER")
 TEST_API_TOKEN = os.environ.get("TEST_API_TOKEN")
 TEST_PUBLISHABLE_KEY = os.environ.get("TEST_PUBLISHABLE_KEY")
 
 service = APIService(token=TEST_API_TOKEN,
-                     publishable_key=TEST_PUBLISHABLE_KEY, private_key=TEST_PRIVATE_KEY, test=True)
+                     publishable_key=TEST_PUBLISHABLE_KEY, test=True)
 
 if __name__ == "__main__":
     print("Running service")
@@ -54,10 +52,6 @@ if __name__ == "__main__":
 
     response = service.transfer.approve(response)
     print(f"Approve response: {response}")
-    # private_key, public_key = generate_keys()
-    # print(private_key)
-    # print("x"*10)
-    # print(public_key)
 
     response = service.collect.checkout(phone_number=TEST_PHONE_NUMBER,
                                         email="tests@example.com", amount=10, currency="KES", comment="Fees")

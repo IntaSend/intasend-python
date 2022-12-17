@@ -15,7 +15,6 @@ class APIBase(object):
         """API helper defination."""
         self.token = kwargs.get("token")
         self.publishable_key = kwargs.get("publishable_key")
-        self.private_key = kwargs.get("private_key")
         self.test = kwargs.get("test", False)
         if not self.token:
             raise Exception("Authentication token is required")
