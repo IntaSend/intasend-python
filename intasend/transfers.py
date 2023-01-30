@@ -36,3 +36,7 @@ class Transfer(APIBase):
     def bank(self, currency, transactions, callback_url=None, wallet_id=None):
         provider = "PESALINK"
         return self.send_money(provider, currency, transactions, callback_url, wallet_id)
+    
+    def airtime(self, currency="KES", transactions=[], callback_url=None, wallet_id=None):
+        provider = "AIRTIME"
+        return self.send_money(provider, currency, transactions, callback_url, wallet_id)
