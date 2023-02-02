@@ -82,7 +82,7 @@ class Collect(APIBase):
         }
         if wallet_id:
             payload.update({"wallet_id": wallet_id})
-        return self.send_request("POST", "payment/collection/", payload)
+        return self.send_request("POST", "payment/mpesa-stk-push/", payload)
 
     def get_quote(self, amount, method, currency="KES", tarrif="BUSINESS-PAYS"):
         payload = {

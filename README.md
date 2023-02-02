@@ -80,3 +80,8 @@ Checkout our [API documentation](https://developers.intasend.com/) for more deta
 
     status = service.transfer.status(response.get("tracking_id"))
     print(f"Status: {status}")
+
+    # Buy AIRTIME
+    transactions = [{'name': 'Joe Doe' ,'account': '25472...'}]
+    response = service.transfer.airtime(currency='KES', transactions=transactions)
+    print(response)
