@@ -66,7 +66,7 @@ class Collect(APIBase):
                 "signature": signature,
                 "checkout_id": checkout_id,
             }
-        return self.send_request("POST", "payment/status/", payload)
+        return self.send_request("POST", "payment/status/", payload, noauth=True)
 
     def mpesa_stk_push(self, phone_number, amount, narrative, currency="KES", api_ref="API Request", name=None, email=None, wallet_id=None):
         payload = {
