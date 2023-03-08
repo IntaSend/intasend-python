@@ -22,7 +22,8 @@ class APIBase(object):
 
     def send_request(self, request_type, service_endpoint, payload, noauth=False):
         url = get_service_url(service_endpoint,  self.test)
-        headers = self.get_headers()
+        headers = self.get_headers(noauth)
+        
         resp = requests.request(
             request_type, url, json=payload, headers=headers)
         if resp.status_code == 400:
@@ -35,7 +36,10 @@ class APIBase(object):
             raise IntaSendUnauthorized(resp.text)
         return resp.json()
 
-    def get_headers(self):
+    def get_headers(self, noauth=False):
+        if noauth:
+            return {"INTASEND_PUBLIC_API_KEY": self.publishable_key}
         return {
-            "Authorization": f"Bearer {self.token}"
+            "Authorization": f"Bearer {self.token}",
+            "INTASEND_PUBLIC_API_KEY": self.publishable_key
         }
