@@ -42,7 +42,7 @@ class Collect(APIBase):
         }
         if wallet_id:
             payload.update({"wallet_id": wallet_id})
-        return self.send_request("POST", "checkout/", payload)
+        return self.send_request("POST", "checkout/", payload, noauth=True)
 
     def status(self, invoice_id, checkout_id=None, signature=None):
         """
