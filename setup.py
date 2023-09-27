@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='intasend-python',
     packages=['intasend'],
-    version='1.0.8',
+    version='1.0.9',
     license='MIT',
     description='Official Python SDK for IntaSend Payments Gateway API',
     readme='README.md',
@@ -12,7 +12,7 @@ setup(
     url='https://github.com/IntaSend/intasend-python',
     download_url='https://github.com/IntaSend/intasend-python/archive/v_1.0.8.tar.gz',
     keywords=['payments', 'mpesa', 'mpesa api', 'card payments', 'visa',
-              'mastercard', 'payments kenya', 'intasend', 'airtime',],
+              'mastercard', 'payments kenya', 'mpesa stk-push', 'stk push', 'intasend', 'airtime',],
     install_requires=[
         'requests',
     ],
