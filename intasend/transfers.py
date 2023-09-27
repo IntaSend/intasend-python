@@ -1,5 +1,5 @@
 from .client import APIBase
-
+import requests
 
 class Transfer(APIBase):
     def send_money(self, provider, currency, transactions, callback_url=None, wallet_id=None):
@@ -36,6 +36,10 @@ class Transfer(APIBase):
     def bank(self, currency, transactions, callback_url=None, wallet_id=None):
         provider = "PESALINK"
         return self.send_money(provider, currency, transactions, callback_url, wallet_id)
+    
+    def get_bank_codes():
+        resp = requests.request("GET", "https://payment.intasend.com/api/v1/send-money/bank-codes/ke/")
+        return resp.json()
     
     def airtime(self, currency="KES", transactions=[], callback_url=None, wallet_id=None):
         provider = "AIRTIME"
