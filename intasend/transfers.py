@@ -37,9 +37,8 @@ class Transfer(APIBase):
         provider = "PESALINK"
         return self.send_money(provider, currency, transactions, callback_url, wallet_id)
     
-    def get_bank_codes():
-        resp = requests.request("GET", "https://payment.intasend.com/api/v1/send-money/bank-codes/ke/")
-        return resp.json()
+    def get_bank_codes(self):
+        return self.send_request("GET", "send-money/bank-codes/ke/", {}, noauth=True)
     
     def airtime(self, currency="KES", transactions=[], callback_url=None, wallet_id=None):
         provider = "AIRTIME"
