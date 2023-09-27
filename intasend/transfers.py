@@ -1,5 +1,4 @@
 from .client import APIBase
-import requests
 
 class Transfer(APIBase):
     def send_money(self, provider, currency, transactions, callback_url=None, wallet_id=None):
