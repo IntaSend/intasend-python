@@ -1,6 +1,5 @@
 from .client import APIBase
 
-
 class Transfer(APIBase):
     def send_money(self, provider, currency, transactions, callback_url=None, wallet_id=None):
         payload = {
@@ -36,6 +35,9 @@ class Transfer(APIBase):
     def bank(self, currency, transactions, callback_url=None, wallet_id=None):
         provider = "PESALINK"
         return self.send_money(provider, currency, transactions, callback_url, wallet_id)
+    
+    def get_bank_codes(self):
+        return self.send_request("GET", "send-money/bank-codes/ke/", {}, noauth=True)
     
     def airtime(self, currency="KES", transactions=[], callback_url=None, wallet_id=None):
         provider = "AIRTIME"

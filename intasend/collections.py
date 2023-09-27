@@ -17,6 +17,7 @@ class Collect(APIBase):
         method = kwargs.get("method")
         api_ref = kwargs.get("api_ref", "API Request")
         callback_url = kwargs.get("callback_url")
+        redirect_url = kwargs.get("redirect_url")
         comment = kwargs.get("comment")
         first_name = kwargs.get("first_name")
         last_name = kwargs.get("last_name")
@@ -32,6 +33,7 @@ class Collect(APIBase):
             "method": method,
             "api_ref": api_ref,
             "callback_url": callback_url,
+            "redirect_url":redirect_url,
             "comment": comment,
             "first_name": first_name,
             "last_name": last_name,
