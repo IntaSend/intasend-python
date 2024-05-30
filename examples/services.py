@@ -43,14 +43,16 @@ if __name__ == "__main__":
     print(response)
     transactions = [{'name': 'test-name', 'account': TEST_PHONE_NUMBER, 'amount': 10},
                     {'name': 'test-name', 'account': TEST_PHONE_NUMBER, 'amount': 10000}]
-    response = service.transfer.mpesa(currency='KES', transactions=transactions)
+    requires_approval = 'YES' # Set to 'NO' if you want the transaction to go through without calling the approve method
+    response = service.transfer.mpesa(currency='KES', transactions=transactions, requires_approval=requires_approval)
     print(response)
 
+    if requires_approval == 'YES':
+        response = service.transfer.approve(response)
+        print(f"Approve response: {response}")
+    
     status = service.transfer.status(response.get("tracking_id"))
     print(f"Status: {status}")
-
-    response = service.transfer.approve(response)
-    print(f"Approve response: {response}")
 
     response = service.collect.checkout(phone_number=TEST_PHONE_NUMBER,
                                         email="tests@example.com", amount=10, currency="KES", comment="Fees")

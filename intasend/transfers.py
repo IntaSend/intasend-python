@@ -1,11 +1,12 @@
 from .client import APIBase
 
 class Transfer(APIBase):
-    def send_money(self, provider, currency, transactions, callback_url=None, wallet_id=None):
+    def send_money(self, provider, currency, transactions, callback_url=None, wallet_id=None, requires_approval='YES'):
         payload = {
             "provider": provider,
             "currency": currency,
             "transactions": transactions,
+            "requires_approval":requires_approval,
             "callback_url": callback_url,
             "wallet_id": wallet_id
         }
@@ -20,21 +21,21 @@ class Transfer(APIBase):
         }
         return self.send_request("POST", "send-money/status/", payload)
 
-    def mpesa(self, currency, transactions, callback_url=None, wallet_id=None):
+    def mpesa(self, currency, transactions, requires_approval="YES", callback_url=None, wallet_id=None):
         provider = "MPESA-B2C"
-        return self.send_money(provider, currency, transactions, callback_url, wallet_id)
+        return self.send_money(provider, currency, transactions, callback_url, wallet_id, requires_approval)
 
-    def mpesa_b2b(self, currency, transactions, callback_url=None, wallet_id=None):
+    def mpesa_b2b(self, currency, transactions, requires_approval="YES",callback_url=None, wallet_id=None):
         provider = "MPESA-B2B"
-        return self.send_money(provider, currency, transactions, callback_url, wallet_id)
+        return self.send_money(provider, currency, transactions, callback_url, wallet_id, requires_approval)
 
-    def intasend(self, currency, transactions, callback_url=None, wallet_id=None):
+    def intasend(self, currency, transactions, requires_approval="YES",callback_url=None, wallet_id=None):
         provider = "INTASEND"
-        return self.send_money(provider, currency, transactions, callback_url, wallet_id)
+        return self.send_money(provider, currency, transactions, callback_url, wallet_id, requires_approval)
 
-    def bank(self, currency, transactions, callback_url=None, wallet_id=None):
+    def bank(self, currency, transactions, requires_approval="YES",callback_url=None, wallet_id=None):
         provider = "PESALINK"
-        return self.send_money(provider, currency, transactions, callback_url, wallet_id)
+        return self.send_money(provider, currency, transactions, callback_url, wallet_id, requires_approval)
     
     def get_bank_codes(self):
         return self.send_request("GET", "send-money/bank-codes/ke/", {}, noauth=True)

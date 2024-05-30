@@ -75,8 +75,13 @@ Checkout our [API documentation](https://developers.intasend.com/) for more deta
     transactions = [{'name': 'Awesome Customer 1', 'account': 25472.., 'amount': 10},
                     {'name': 'Awesome Customer 2', 'account': 25472.., 'amount': 10000}]
                     
-    response = service.transfer.mpesa(currency='KES', transactions=transactions)
+    requires_approval = 'YES' # Set to 'NO' if you want the transaction to go through without calling the approve method
+    response = service.transfer.mpesa(currency='KES', transactions=transactions, requires_approval=requires_approval)
     print(response)
+
+    if requires_approval == 'YES':
+        response = service.transfer.approve(response)
+        print(f"Approve response: {response}")
 
     status = service.transfer.status(response.get("tracking_id"))
     print(f"Status: {status}")
