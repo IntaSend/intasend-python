@@ -50,7 +50,7 @@ if __name__ == "__main__":
     if requires_approval == 'YES':
         response = service.transfer.approve(response)
         print(f"Approve response: {response}")
-    
+
     status = service.transfer.status(response.get("tracking_id"))
     print(f"Status: {status}")
 

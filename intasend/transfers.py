@@ -40,6 +40,8 @@ class Transfer(APIBase):
     def get_bank_codes(self):
         return self.send_request("GET", "send-money/bank-codes/ke/", {}, noauth=True)
     
-    def airtime(self, currency="KES", transactions=[], requires_approval="YES", callback_url=None, wallet_id=None):
+    def airtime(self, currency="KES", transactions=None, requires_approval="YES", callback_url=None, wallet_id=None):
+        if not transactions:
+            raise ValueError("Transantion details requiired")
         provider = "AIRTIME"
         return self.send_money(provider, currency, transactions, callback_url, wallet_id, requires_approval)
