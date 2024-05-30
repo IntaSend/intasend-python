@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='intasend-python',
     packages=['intasend'],
-    version='1.0.9',
+    version='1.1.0',
     license='MIT',
     description='Official Python SDK for IntaSend Payments Gateway API',
     readme='README.md',
