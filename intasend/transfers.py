@@ -6,6 +6,9 @@ from .client import APIBase
 
 class Transfer(APIBase):
     def send_money(self, provider, currency, transactions, callback_url=None, wallet_id=None, requires_approval='YES'):
+        if not transactions:
+            raise ValueError("Transaction details required")
+      
         payload = {
             "provider": provider,
             "currency": currency,
@@ -46,8 +49,6 @@ class Transfer(APIBase):
         return self.send_request("GET", "send-money/bank-codes/ke/", {}, noauth=True)
     
     def airtime(self, currency="KES", transactions=None, requires_approval="YES", callback_url=None, wallet_id=None):
-        if not transactions:
-            raise ValueError("Transantion details requiired")
         provider = "AIRTIME"
         return self.send_money(provider, currency, transactions, callback_url, wallet_id, requires_approval)
 
