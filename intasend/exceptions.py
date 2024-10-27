@@ -12,3 +12,7 @@ class IntaSendUnauthorized(Exception):
 
 class IntaSendServerError(Exception):
     pass
+
+
+class NarrativeExceedsLengthLimit(ValueError):
+    pass

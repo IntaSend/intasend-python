@@ -1,3 +1,7 @@
+from __future__ import annotations
+from typing import Dict, Iterable
+
+from intasend.exceptions import NarrativeExceedsLengthLimit
 from .client import APIBase
 
 class Transfer(APIBase):
@@ -10,6 +14,7 @@ class Transfer(APIBase):
             "callback_url": callback_url,
             "wallet_id": wallet_id
         }
+        _ = _validate_transaction_data(transactions)
         return self.send_request("POST", "send-money/initiate/", payload)
 
     def approve(self, payload):
@@ -45,3 +50,11 @@ class Transfer(APIBase):
             raise ValueError("Transantion details requiired")
         provider = "AIRTIME"
         return self.send_money(provider, currency, transactions, callback_url, wallet_id, requires_approval)
+
+
+def _validate_transaction_data(transactions: Iterable[Dict[str, str]]) -> None:
+    for transaction in transactions:
+        if transaction['narrative']:
+            if len(transaction['narrative']) > 22:
+                errmsg = "String values beyond 22 chars are truncated by default."
+                raise NarrativeExceedsLengthLimit(errmsg)
