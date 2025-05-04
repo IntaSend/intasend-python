@@ -17,7 +17,7 @@ class Transfer(APIBase):
             "callback_url": callback_url,
             "wallet_id": wallet_id
         }
-        _ = _validate_transaction_data(transactions)
+        _validate_transaction_data(transactions)
         return self.send_request("POST", "send-money/initiate/", payload)
 
     def approve(self, payload):
