@@ -1,7 +1,14 @@
+from __future__ import annotations
+from typing import Dict, Iterable
+import warnings
+
 from .client import APIBase
 
 class Transfer(APIBase):
     def send_money(self, provider, currency, transactions, callback_url=None, wallet_id=None, requires_approval='YES'):
+        if not transactions:
+            raise ValueError("Transaction details required")
+      
         payload = {
             "provider": provider,
             "currency": currency,
@@ -10,6 +17,7 @@ class Transfer(APIBase):
             "callback_url": callback_url,
             "wallet_id": wallet_id
         }
+        _validate_transaction_data(transactions)
         return self.send_request("POST", "send-money/initiate/", payload)
 
     def approve(self, payload):
@@ -41,7 +49,13 @@ class Transfer(APIBase):
         return self.send_request("GET", "send-money/bank-codes/ke/", {}, noauth=True)
     
     def airtime(self, currency="KES", transactions=None, requires_approval="YES", callback_url=None, wallet_id=None):
-        if not transactions:
-            raise ValueError("Transantion details requiired")
         provider = "AIRTIME"
         return self.send_money(provider, currency, transactions, callback_url, wallet_id, requires_approval)
+
+
+def _validate_transaction_data(transactions: Iterable[Dict[str, str]]) -> None:
+    for transaction in transactions:
+        if transaction['narrative']:
+            if len(transaction['narrative']) > 22:
+                warn_msg = "String values beyond 22 chars are truncated in the confirmation sms by default."
+                warnings.warn(warn_msg)
