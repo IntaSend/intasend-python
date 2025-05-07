@@ -1,8 +1,7 @@
-import warnings
 from __future__ import annotations
 from typing import Dict, Iterable
+import warnings
 
-from intasend.exceptions import NarrativeExceedsLengthLimit
 from .client import APIBase
 
 class Transfer(APIBase):
