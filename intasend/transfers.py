@@ -1,3 +1,4 @@
+import warnings
 from __future__ import annotations
 from typing import Dict, Iterable
 
@@ -57,5 +58,5 @@ def _validate_transaction_data(transactions: Iterable[Dict[str, str]]) -> None:
     for transaction in transactions:
         if transaction['narrative']:
             if len(transaction['narrative']) > 22:
-                errmsg = "String values beyond 22 chars are truncated by default."
-                raise NarrativeExceedsLengthLimit(errmsg)
+                warn_msg = "String values beyond 22 chars are truncated in the confirmation sms by default."
+                warnings.warn(warn_msg)
